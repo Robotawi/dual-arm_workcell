@@ -176,10 +176,16 @@
     <origin xyz="-0.25 -0.5 1.25" rpy="0 3.14159 0"/>
   </joint>
 
+  <!--Include ur arm model-->
   <xacro:include filename="$(find ur_description)/urdf/ur3.urdf.xacro"/>
   <xacro:ur3_robot prefix="rgt_" joint_limited="true"/>
   <xacro:ur3_robot prefix="lft_" joint_limited="true"/>
 
+  <!--Include robotiq 85 gripper model-->
+
+  <xacro:include filename='$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model.xacro'/>
+  <xacro:robotiq_arg2f_85 prefix="rgt_"/>
+  <xacro:robotiq_arg2f_85 prefix="lft_"/>
   <!--
   <joint name="table_to_robot" type="fixed">
     <parent link="table"/>
@@ -198,6 +204,22 @@
     <child link="lft_base_link"/>
     <origin xyz="0 0.258 1.610" rpy="-2.35619 0 0"/>
   </joint>
+
+
+  <joint name="gripper_to_rgt_arm" type="fixed">
+    <parent link="rgt_ee_link"/>
+    <!-- <parent link="body"/> -->
+    <child link="rgt_robotiq_arg2f_base_link"/>
+    <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+  </joint>
+
+  <joint name="gripper_to_lft_arm" type="fixed">
+    <parent link="lft_ee_link"/>
+    <!-- <parent link="body"/> -->
+    <child link="lft_robotiq_arg2f_base_link"/>
+    <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+  </joint>
+
 </robot>
 <!-- 
 <link name="link_name">
